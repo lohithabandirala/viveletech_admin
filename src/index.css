@@ -278,12 +278,26 @@ body {
   transition: all 0.3s ease;
   font-weight: 500;
   cursor: pointer;
+  background: transparent;
+  /* Explicitly remove default button background */
+  border: 1px solid transparent;
+  /* Explicitly remove default button border but keep layout consistent */
+  width: 100%;
+  /* Ensure full width for button */
+  text-align: left;
+  /* Align text to left */
+  font-family: inherit;
+  /* Inherit font */
+  font-size: 1rem;
+  /* Consistent font size */
 }
 
 .nav-link:hover {
-  background: var(--bg-tertiary);
+  background: rgba(255, 255, 255, 0.05);
+  /* Subtle light overlay on hover */
   color: var(--text-primary);
   transform: translateX(5px);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-link.active {
