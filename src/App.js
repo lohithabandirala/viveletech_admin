@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Participants from './components/Participants';
 import EventRegistrations from './components/EventRegistrations';
+import Header from './components/Header';
 import './index.css';
 
 function App() {
@@ -24,6 +25,16 @@ function App() {
 
   const handleLogin = () => {
     // Auth state will be updated by onAuthStateChanged
+  };
+
+
+  const getPageTitle = () => {
+    switch (currentPage) {
+      case 'dashboard': return 'Dashboard';
+      case 'participants': return 'Participants';
+      case 'events': return 'Event Registrations';
+      default: return 'Vive Le Tech Admin';
+    }
   };
 
   const renderPage = () => {
@@ -63,11 +74,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Mobile Menu Button */}
-      <button className="mobile-menu-btn" onClick={toggleSidebar}>
-        ☰
-      </button>
-
       {/* Overlay for mobile */}
       {isSidebarOpen && (
         <div className="sidebar-overlay" onClick={closeSidebar}></div>
@@ -83,8 +89,16 @@ function App() {
         isOpen={isSidebarOpen}
         onClose={closeSidebar}
       />
+
       <div className="main-content">
-        {renderPage()}
+        <Header
+          toggleSidebar={toggleSidebar}
+          userEmail={user.email}
+          title={getPageTitle()}
+        />
+        <div className="page-content">
+          {renderPage()}
+        </div>
       </div>
     </div>
   );

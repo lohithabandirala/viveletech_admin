@@ -344,8 +344,80 @@ body {
 .main-content {
   flex: 1;
   margin-left: 280px;
-  padding: var(--spacing-xl);
   background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 var(--spacing-xl);
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-menu-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.page-content {
+  padding: var(--spacing-xl);
+  flex: 1;
+  overflow-y: auto;
 }
 
 .page-header {
@@ -656,22 +728,7 @@ body {
 
 /* Responsive */
 /* Mobile Controls */
-.mobile-menu-btn {
-  display: none;
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 100;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: var(--radius-md);
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-md);
-}
-
+/* Mobile Controls */
 .mobile-close-btn {
   display: none;
 }
@@ -686,10 +743,8 @@ body {
     flex-direction: column;
   }
 
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .header-menu-btn {
+    display: block;
   }
 
   .sidebar-overlay {
@@ -743,10 +798,14 @@ body {
 
   .main-content {
     margin-left: 0;
-    padding: var(--spacing-lg);
-    padding-top: 4rem;
-    /* Space for hamburger button */
-    width: 100%;
+  }
+
+  .page-content {
+    padding: var(--spacing-md);
+  }
+
+  .app-header {
+    padding: 0 var(--spacing-md);
   }
 
   .stats-grid {
