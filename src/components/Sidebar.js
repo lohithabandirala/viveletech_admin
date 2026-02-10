@@ -28,13 +28,13 @@ function Sidebar({ currentPage, onNavigate, userEmail }) {
                 <ul className="nav-menu">
                     {menuItems.map(item => (
                         <li key={item.id} className="nav-item">
-                            <a
+                            <button
                                 className={`nav-link ${currentPage === item.id ? 'active' : ''}`}
                                 onClick={() => onNavigate(item.id)}
                             >
                                 <span className="nav-icon">{item.icon}</span>
                                 {item.label}
-                            </a>
+                            </button>
                         </li>
                     ))}
                 </ul>
