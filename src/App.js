@@ -39,6 +39,16 @@ function App() {
     }
   };
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -53,10 +63,25 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Mobile Menu Button */}
+      <button className="mobile-menu-btn" onClick={toggleSidebar}>
+        ☰
+      </button>
+
+      {/* Overlay for mobile */}
+      {isSidebarOpen && (
+        <div className="sidebar-overlay" onClick={closeSidebar}></div>
+      )}
+
       <Sidebar
         currentPage={currentPage}
-        onNavigate={setCurrentPage}
+        onNavigate={(page) => {
+          setCurrentPage(page);
+          closeSidebar();
+        }}
         userEmail={user.email}
+        isOpen={isSidebarOpen}
+        onClose={closeSidebar}
       />
       <div className="main-content">
         {renderPage()}

@@ -2,7 +2,7 @@ import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 
-function Sidebar({ currentPage, onNavigate, userEmail }) {
+function Sidebar({ currentPage, onNavigate, userEmail, isOpen, onClose }) {
     const handleLogout = async () => {
         try {
             await signOut(auth);
@@ -17,8 +17,14 @@ function Sidebar({ currentPage, onNavigate, userEmail }) {
         { id: 'events', label: 'Event Registrations', icon: '🎯' }
     ];
 
+
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+            {/* Mobile Close Button */}
+            <button className="mobile-close-btn" onClick={onClose}>
+                ✕
+            </button>
+
             <div className="sidebar-header">
                 <h2>🎓 Vive Le Tech</h2>
                 <p>Admin Panel</p>
