@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
+const EVENTS = [
+    { id: 'cipherville', name: 'Cipherville', icon: '🔐' },
+    { id: 'dsa-master', name: 'DSA Master', icon: '💻' },
+    { id: 'ethitech-mania', name: 'Ethitech Mania', icon: '🎯' }
+];
+
 function Dashboard() {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -14,7 +20,10 @@ function Dashboard() {
         try {
             const statsDoc = await getDoc(doc(db, 'counters', 'stats'));
             if (statsDoc.exists()) {
+                console.log("Stats fetched:", statsDoc.data());
                 setStats(statsDoc.data());
+            } else {
+                console.log("No stats document found");
             }
         } catch (error) {
             console.error('Error fetching stats:', error);
@@ -93,24 +102,21 @@ function Dashboard() {
                     <h2 className="card-title">Event-wise Registrations</h2>
                 </div>
                 <div className="card-body">
-                    {stats.events ? (
-                        <div className="stats-grid">
-                            {Object.entries(stats.events).map(([eventName, count]) => (
-                                <div key={eventName} className="stat-card">
+                    <div className="stats-grid">
+                        {EVENTS.map(event => {
+                            const count = stats.events ? (stats.events[event.id] || 0) : 0;
+                            return (
+                                <div key={event.id} className="stat-card">
                                     <div className="stat-header">
-                                        <span className="stat-title">{formatEventName(eventName)}</span>
-                                        <div className="stat-icon primary">🎯</div>
+                                        <span className="stat-title">{event.name}</span>
+                                        <div className="stat-icon primary">{event.icon}</div>
                                     </div>
                                     <div className="stat-value">{count}</div>
                                     <div className="stat-label">Registrations</div>
                                 </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="empty-state">
-                            <p>No event data available</p>
-                        </div>
-                    )}
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 
