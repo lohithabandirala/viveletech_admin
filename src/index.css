@@ -293,11 +293,14 @@ body {
 }
 
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.05);
-  /* Subtle light overlay on hover */
-  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.2);
+  /* Purple background on hover */
+  color: white;
   transform: translateX(5px);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+  /* Purple border */
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  /* Purple glow */
 }
 
 .nav-link.active {
